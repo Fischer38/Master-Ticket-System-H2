@@ -1,13 +1,13 @@
 ```mermaid
 erDiagram
-    USER {
+    user {
         int id PK
         varchar username
         varchar email
         varchar password
         role ENUM "admin,support,user"
     }
-    TICKET {
+    ticket {
         int id PK
         int ticket_type_id FK
         int assigned_to_user_id FK
@@ -19,18 +19,18 @@ erDiagram
         datetime created_at
         datetime updated_at
     }
-    TICKET_TYPE {
+    ticket_type {
         int id PK
         varchar name
     }
-    TICKET_COMMENT {
+    ticket_comment {
         int id PK
         int ticket_id FK
         int user_id FK
         text comment
         datetime created_at
     }
-    TICKET_HISTORY {
+    ticket_history {
         int id PK
         int ticket_id FK
         varchar changed_field 
@@ -41,11 +41,11 @@ erDiagram
     }
 
     %% Relations
-        USER ||--o{ TICKET : "created"
-        USER ||--o{ TICKET_COMMENT : "wrote"
-        USER ||--o{ TICKET : "assigned as support"
-        TICKET_TYPE ||--o{ TICKET : "is type of"
-        TICKET ||--o{ TICKET_COMMENT : "has comments"
-        TICKET ||--o{ TICKET_HISTORY : "has change history"
-        USER ||--o{ TICKET_HISTORY : "changes tracked by"
+        User ||--o{ Ticket : "created"
+        User ||--o{ Ticket_comment : "wrote"
+        User ||--o{ Ticket : "assigned as support"
+        Ticket_type ||--o{ Ticket : "is type of"
+        Ticket ||--o{ Ticket_comment : "has comments"
+        Ticket ||--o{ Ticket_history : "has change history"
+        User ||--o{ Ticket_history : "changes tracked by"
 ```

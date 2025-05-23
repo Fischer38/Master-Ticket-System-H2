@@ -2,6 +2,7 @@ import Express from 'express';
 import session from 'express-session';
 import DotEnv from 'dotenv';
 
+import sign from './routes/sign.js'
 import commonRoute from './routes/common.js';
 
 let app = Express();
@@ -25,6 +26,7 @@ app.use(session({
 
 app.use(Express.static('public'));
 
+app.use('/sign', sign);
 app.use(commonRoute);
 
 app.listen(process.env.PORT, (err) => {

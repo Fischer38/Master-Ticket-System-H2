@@ -1,7 +1,7 @@
 import {DataTypes} from 'sequelize';
 import sequelize from '../database.js';
 
-let TICKET_COMMENT = sequelize.define('TICKET_COMMENT', {
+let ticket_comment = sequelize.define('ticket_comment', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -11,7 +11,7 @@ let TICKET_COMMENT = sequelize.define('TICKET_COMMENT', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'TICKET',
+            model: 'tickets',
             key: 'id'
         }
     },
@@ -19,7 +19,8 @@ let TICKET_COMMENT = sequelize.define('TICKET_COMMENT', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'USER',
+            model: 'users',
+            key: 'id'
         }
     },
     comment: {
@@ -34,4 +35,4 @@ let TICKET_COMMENT = sequelize.define('TICKET_COMMENT', {
     }
 })
 
-export default TICKET_COMMENT;
+export default ticket_comment;

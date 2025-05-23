@@ -1,0 +1,15 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100dvh;
+    width: 100dvw;
+    background: linear-gradient(15deg, #ffffff, #00da1d);
+    display: grid;
+    place-items: center;
+}
+
+main{
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}

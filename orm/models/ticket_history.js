@@ -1,7 +1,7 @@
 import {DataTypes} from 'sequelize';
 import sequelize from '../database.js';
 
-let TICKET_HISTORY = sequelize.define('TICKET_HISTORY', {
+let ticket_history = sequelize.define('ticket_history', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -11,7 +11,7 @@ let TICKET_HISTORY = sequelize.define('TICKET_HISTORY', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'TICKET',
+            model: 'tickets',
             key: 'id'
         }
     },
@@ -33,7 +33,7 @@ let TICKET_HISTORY = sequelize.define('TICKET_HISTORY', {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'USER',
+            model: 'users',
             key: 'id'
         }
     },
@@ -44,4 +44,4 @@ let TICKET_HISTORY = sequelize.define('TICKET_HISTORY', {
     }
 })
 
-export default TICKET_HISTORY;
+export default ticket_history;

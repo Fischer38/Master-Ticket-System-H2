@@ -1,7 +1,7 @@
 import {DataTypes} from 'sequelize';
 import sequelize from '../database.js';
 
-let USER = sequelize.define('USER', {
+let user = sequelize.define('user', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -26,4 +26,4 @@ let USER = sequelize.define('USER', {
     }
 })
 
-export default USER;
+export default user;

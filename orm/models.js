@@ -1,16 +1,16 @@
 import sequelize from './database.js';
-import USER from './models/USER.js';
-import TICKET from './models/TICKET.js';
-import TICKET_TYPE from './models/TICKET_TYPE.js';
-import TICKET_COMMENT from './models/TICKET_COMMENT.js';
-import TICKET_HISTORY from './models/TICKET_HISTORY.js';
+import user from './models/user.js';
+import ticket_type from './models/ticket_type.js';
+import ticket from './models/ticket.js';
+import ticket_comment from './models/ticket_comment.js';
+import ticket_history from './models/ticket_history.js';
 
 
 export default {
     sequelize,
-    USER,
-    TICKET_TYPE,
-    TICKET,
-    TICKET_COMMENT,
-    TICKET_HISTORY
+    user: user,
+    ticket_type: ticket_type,
+    ticket: ticket,
+    ticket_comment: ticket_comment,
+    ticket_history: ticket_history
 };
