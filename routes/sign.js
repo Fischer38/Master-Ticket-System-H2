@@ -10,23 +10,78 @@ router.get('/', (req, res) => {
 })
 
 router.post('/signIn', async (req, res) => {
-    let {username, password} = req.body;
-    let user = await Models.user.findOne({where: {username}});
-    if(!user) {
-        return res.render('sign.ejs', {error: 'User not found'});
+    let {user, pass} = req.body;
+
+    if(!user || !pass) {
+        return res.status(400).json({message: 'Missing username or password'});
     }
-    let isMatch = await bcrypt.compare(password, user.password);
-    if(!isMatch) {}
+
+    let userDB = await Models.user.findOne({where: {username: user}});
+    if(!userDB) {
+        return res.status (404).json({message: 'User not found'});
+    }
+
+    let isMatch = await bcrypt.compare(pass, userDB.password);
+
+    if(!isMatch) {
+        return res.status(401).json({message: 'Wrong password'});
+    }
+
+    return res.status(200).json({message: 'Sign in successful'});
 })
 
 router.post('/signUp', async (req, res) => {
-    let {username, email, password} = req.body;
-    let user = await Models.user.findOne({where: {username}});
-    if(user) {
-        return res.render('register.ejs', {error: 'Username already exists'});
+    let {user, email, pass, passRepeat} = req.body;
+
+    if(!user || !email || !pass || !passRepeat) {
+        return res.status(400).json({message: 'Missing username, email, password or confirm password'});
     }
-    user = await Models.user.create({username, email, password});
-    req.session.user = user;
+
+    if(user.length <= 3) {
+        return res.status(400).json({message: 'Username must be at least 3 characters long'});
+    }
+
+    let userDB = await Models.user.findOne({where: {username: user}});
+    if(userDB) {
+        return res.status(400).json({message: 'Username already exists'});
+    }
+
+    if(!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        return res.status(400).json({message: 'Invalid email'});
+    }
+
+    let emailDB = await Models.user.findOne({where: {email: email}});
+    if(emailDB) {
+        return res.status(400).json({message: 'Email already exists'});
+    }
+
+    if(pass.length < 8) {
+        return res.status(400).json({message: 'Password must be at least 8 characters long'});
+    }
+
+    if(pass.match(/[a-z]/i) === null) {
+        return res.status(400).json({message: 'Password must contain at least one lowercase letter'});
+    }
+
+    if(pass.match(/[A-Z]/i) === null) {
+        return res.status(400).json({message: 'Password must contain at least one uppercase letter'});
+    }
+
+    if(pass.match(/[a-zA-Z]/i) === null) {
+        return res.status(400).json({message: 'Password must contain at least one letter'});
+    }
+
+    if(pass.match(/[0-9]/i) === null) {
+        return res.status(400).json({message: 'Password must contain at least one number'});
+    }
+
+    if(pass !== passRepeat) {
+        return res.status(400).json({message: 'Passwords do not match'});
+    }
+
+    let hashedPass = await bcrypt.hash(pass, 10);
+    await Models.user.create({username: user, email: email, password: hashedPass});
+    return res.status(201).json({message: 'Sign up successful'});
 })
 
 router.get('/logout', (req, res) => {

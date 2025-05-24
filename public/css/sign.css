@@ -1,6 +1,11 @@
-body{
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: monospace, system-ui;
+}
+
+body{
     height: 100dvh;
     width: 100dvw;
     background: linear-gradient(15deg, #ffffff, #00da1d);
@@ -12,4 +17,35 @@ main{
     background: #fff;
     padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 0 10px #000;
+}
+
+h1{
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+form  label{
+    font-size: 1.2rem;
+}
+
+form input{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+form input:focus{
+    border: 1px solid #000;
+}
+
+form button{
+    padding: 10px;
+    border-radius: 5px;
 }
