@@ -6,6 +6,9 @@ import Models from "../orm/models.js";
 let router = Router();
 
 router.get('/', (req, res) => {
+    if(req.session.username) {
+        return res.redirect('/home');
+    }
     res.render('sign.ejs')
 })
 
@@ -26,6 +29,10 @@ router.post('/signIn', async (req, res) => {
     if(!isMatch) {
         return res.status(401).json({message: 'Wrong password'});
     }
+
+    req.session.userid = userDB.id;
+    req.session.username = userDB.username;
+    req.session.role = userDB.role;
 
     return res.status(200).json({message: 'Sign in successful'});
 })
@@ -80,11 +87,16 @@ router.post('/signUp', async (req, res) => {
     }
 
     let hashedPass = await bcrypt.hash(pass, 10);
-    await Models.user.create({username: user, email: email, password: hashedPass});
+    await Models.user.create({username: user, email: email, password: hashedPass, role: 'user'});
+
+    req.session.userid = userDB.id;
+    req.session.username = userDB.username;
+    req.session.role = userDB.role;
+
     return res.status(201).json({message: 'Sign up successful'});
 })
 
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
 })

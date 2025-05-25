@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace, system-ui;
+}
+
+body{
+    height: 100dvh;
+    width: 100dvw;
+    background: linear-gradient(15deg, #ffffff, #00da1d);
+}
+
+header{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    background: #fff;
+}

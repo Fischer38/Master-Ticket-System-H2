@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Håndter sign in formular
     signInForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -29,12 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             const data = await response.json();
             console.log('Sign in respons:', data.message);
+            window.location.reload();
         } catch (error) {
+            innerHTML = '';
             console.error('Sign in fejl:', error);
         }
     });
 
-    // Håndter sign up formular
     signUpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);

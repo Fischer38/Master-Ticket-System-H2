@@ -22,7 +22,9 @@ let user = sequelize.define('user', {
         allowNull: false
     },
     role: {
-        type: DataTypes.ENUM('admin', "support", 'user')
+        type: DataTypes.ENUM('admin', "support", 'user'),
+        defaultValue: 'user',
+        allowNull: false
     }
 })
 
