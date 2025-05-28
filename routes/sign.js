@@ -87,7 +87,7 @@ router.post('/signUp', async (req, res) => {
     }
 
     let hashedPass = await bcrypt.hash(pass, 10);
-    await Models.user.create({username: user, email: email, password: hashedPass, role: 'user'});
+    userDB = await Models.user.create({username: user, email: email, password: hashedPass, role: 'user'});
 
     req.session.userid = userDB.id;
     req.session.username = userDB.username;

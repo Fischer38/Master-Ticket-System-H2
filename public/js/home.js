@@ -17,9 +17,26 @@ async function loadMain(type) {
 
     const script = main.querySelectorAll('script');
     script.forEach((script) => {
+        const src = script.src;
+        const content = script.innerText;
+
+        if(src) {
+            const existingScript = document.querySelector(`script[src="${src}"]`);
+            if(existingScript) {
+                existingScript.remove();
+            }
+        }else{
+            const existingInlineScript = Array.from(document.querySelectorAll('script')).some(existing => existing.innerText === content);
+            if(!existingInlineScript) {
+                const newScript = document.createElement('script');
+                newScript.src = src || null;
+                newScript.textContent = content;
+                document.body.appendChild(newScript);
+            }
+        }
         const newScript = document.createElement('script');
-        newScript.src = script.src || null;
-        newScript.textContent = script.innerText;
+        newScript.src = src || null;
+        newScript.textContent = content;
         document.body.appendChild(newScript);
     });
 }
