@@ -1,11 +1,15 @@
 <section>
     <h2>new ticket</h2>
-    <form action="">
-        <label>Title</label>
-        <input type="text">
-        <label>Description</label>
-        <textarea></textarea>
-        <button>Submit</button>
+    <form id="newTicketForm">
+        <label for="ticketType">Ticket Type</label>
+        <select id="ticketType" name="type">
+            <option value="null" selected>none</option>
+        </select>
+        <label for="ticketSubject">subject</label>
+        <input id="ticketSubject" name="subject" type="text">
+        <label for="ticketDescription">Description</label>
+        <textarea id="ticketDescription" name="description"></textarea>
+        <button onclick="submitTicket()">Submit</button>
     </form>
+    <script src="js/partial/newTicket.js"></script>
 </section>
-<script src="js/partial/newTicket.js"></script>

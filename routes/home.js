@@ -23,7 +23,6 @@ router.get('/loadNav', (req, res) => {
 
 router.get('/loadMain/:type', async (req, res) => {
     const type = req.params.type;
-    console.log(type);
 
     switch (type) {
         case 'newTicket':

@@ -14,6 +14,14 @@ async function loadNav() {
 async function loadMain(type) {
     const res = await fetch(`/home/loadMain/${type}`);
     main.innerHTML = await res.text();
+
+    const script = main.querySelectorAll('script');
+    script.forEach((script) => {
+        const newScript = document.createElement('script');
+        newScript.src = script.src || null;
+        newScript.textContent = script.innerText;
+        document.body.appendChild(newScript);
+    });
 }
 
 loadNav().finally();
